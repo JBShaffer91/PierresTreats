@@ -9,14 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PierresTreatsContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 23))));
 builder.Services.AddDefaultIdentity<ApplicationUser>()
-    .AddEntityFrameworkStores<PierresTreatsContext>();
-builder.Services.AddControllersWithViews();
-
-// Add services for Identity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<PierresTreatsContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -33,11 +30,17 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Add this line
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+);
+
+app.MapRazorPages();
 
 app.Run();
