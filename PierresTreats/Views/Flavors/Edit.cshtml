@@ -1,0 +1,12 @@
+@model PierresTreats.Models.Flavor
+
+<h2>Edit @Model.Name</h2>
+
+<form asp-action="Edit">
+  <input type="hidden" asp-for="FlavorId" />
+  <div class="form-group">
+    <label asp-for="Name">Flavor Name</label>
+    <input asp-for="Name" class="form-control" />
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary" />
+</form>

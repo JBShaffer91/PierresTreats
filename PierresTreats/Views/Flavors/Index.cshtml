@@ -1,0 +1,25 @@
+@model IEnumerable<PierresTreats.Models.Flavor>
+
+<h2>All Flavors</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var flavor in Model)
+    {
+      <tr>
+        <td>@flavor.Name</td>
+        <td>
+          <a asp-action="Details" asp-route-id="@flavor.FlavorId">Details</a> |
+          <a asp-action="Edit" asp-route-id="@flavor.FlavorId">Edit</a> |
+          <a asp-action="Delete" asp-route-id="@flavor.FlavorId">Delete</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

@@ -12,6 +12,12 @@ builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddEntityFrameworkStores<PierresTreatsContext>();
 builder.Services.AddControllersWithViews();
 
+// Add services for Identity
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<PierresTreatsContext>()
+    .AddDefaultUI()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

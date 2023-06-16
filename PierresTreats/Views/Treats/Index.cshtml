@@ -1,0 +1,25 @@
+@model IEnumerable<PierresTreats.Models.Treat>
+
+<h2>All Treats</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var treat in Model)
+    {
+      <tr>
+        <td>@treat.Name</td>
+        <td>
+          <a asp-action="Details" asp-route-id="@treat.TreatId">Details</a> |
+          <a asp-action="Edit" asp-route-id="@treat.TreatId">Edit</a> |
+          <a asp-action="Delete" asp-route-id="@treat.TreatId">Delete</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

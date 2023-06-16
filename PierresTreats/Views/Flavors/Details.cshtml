@@ -1,0 +1,8 @@
+@model PierresTreats.Models.Flavor
+
+<h2>@Model.Name Details</h2>
+
+<p>
+  <a asp-action="Edit" asp-route-id="@Model.FlavorId">Edit</a> |
+  <a asp-action="Delete" asp-route-id="@Model.FlavorId">Delete</a>
+</p>
