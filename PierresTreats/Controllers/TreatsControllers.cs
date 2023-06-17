@@ -85,7 +85,7 @@ namespace PierresTreats.Controllers
       return View(thisTreat);
     }
 
-    [HttpPost, ActionName("Delete")]
+    [HttpPost]
     public ActionResult DeleteConfirmed(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);

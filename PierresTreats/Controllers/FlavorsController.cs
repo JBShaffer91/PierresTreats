@@ -75,7 +75,7 @@ namespace PierresTreats.Controllers
       return View(thisFlavor);
     }
 
-    [HttpPost, ActionName("Delete")]
+    [HttpPost]
     public ActionResult DeleteConfirmed(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
