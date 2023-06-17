@@ -29,7 +29,7 @@ PierresTreats is a web application that allows users to view and manage sweet an
 }
 ```
 * Replace 'YourPassword' with your own MySQL password.
-* To start the program, run dotnet run.
+* To start the program, run dotnet run and navigate to http://localhost:5145 in your browser.
 
 ## Technologies Used
 * C#
