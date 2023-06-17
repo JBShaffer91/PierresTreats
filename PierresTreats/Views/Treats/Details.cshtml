@@ -1,8 +1,15 @@
-@model PierresTreats.Models.Treat
-
 <h2>@Model.Name Details</h2>
 
 <p>
   <a asp-action="Edit" asp-route-id="@Model.TreatId">Edit</a> |
   <a asp-action="Delete" asp-route-id="@Model.TreatId">Delete</a>
+  <a asp-action="AddFlavor" asp-route-id="@Model.TreatId">Add a flavor to this treat</a>
 </p>
+
+<h3>Flavors:</h3>
+<ul>
+  @foreach (var flavorTreat in Model.Flavors)
+  {
+    <li>@flavorTreat.Flavor.Name</li>
+  }
+</ul>

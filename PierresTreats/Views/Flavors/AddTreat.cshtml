@@ -1,0 +1,19 @@
+@model PierresTreats.Models.Flavor
+@using PierresTreats.Models
+@{
+  ViewBag.Title = "Add Treat";
+}
+
+<h2>Add Treat to @Model.Name</h2>
+
+<form method="post" asp-controller="Flavors" asp-action="AddTreat">
+  <div class="form-group">
+    <label for="TreatId">Treat:</label>
+    <select class="form-control" id="TreatId" name="TreatId" asp-items="ViewBag.TreatId">
+      <option value="0">--Select Treat--</option>
+    </select>
+  </div>
+  <input type="hidden" name="FlavorId" value="@Model.FlavorId" />
+  <input type="hidden" name="Name" value="@Model.Name" />
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace PierresTreats.Controllers
 {
@@ -42,9 +43,15 @@ namespace PierresTreats.Controllers
     public ActionResult Details(int id)
     {
       var thisFlavor = _db.Flavors
-          .Include(flavor => flavor.Treats)
-          .ThenInclude(join => join.Treat)
-          .FirstOrDefault(flavor => flavor.FlavorId == id);
+        .Include(flavor => flavor.Treats)
+        .ThenInclude(join => join.Treat)
+        .FirstOrDefault(flavor => flavor.FlavorId == id);
+
+      if (thisFlavor == null)
+      {
+        return NotFound();
+      }
+
       return View(thisFlavor);
     }
 
@@ -79,6 +86,29 @@ namespace PierresTreats.Controllers
       _db.Flavors.Remove(thisFlavor);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult AddTreat(int id)
+    {
+      var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+      return View(thisFlavor);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult AddTreat([Bind("FlavorId,Name")] Flavor flavor, int TreatId)
+    {
+      if (TreatId != 0 && flavor.FlavorId != 0)
+      {
+        _db.FlavorTreats.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+        _db.SaveChanges();
+        return RedirectToAction("Details", new { id = flavor.FlavorId });
+      }
+      else
+      {
+        return NotFound();
+      }
     }
   }
 }
