@@ -5,14 +5,21 @@
 
 <h2>Add Flavor to @Model.Name</h2>
 
-<form method="post" asp-controller="Treats" asp-action="AddFlavor" asp-route-id="@Model.TreatId">
-  <div class="form-group">
-    <label for="FlavorId">Flavor:</label>
-    <select class="form-control" id="FlavorId" name="FlavorId" asp-items="ViewBag.FlavorId">
-      <option value="0">--Select Flavor--</option>
-    </select>
-  </div>
-  <input type="hidden" name="TreatId" value="@Model.TreatId" />
-  <input type="hidden" name="Name" value="@Model.Name" />
-  <button type="submit" class="btn btn-primary">Add</button>
-</form>
+@if (ViewBag.FlavorId != null && ((SelectList)ViewBag.FlavorId).Any())
+{
+    <form method="post" asp-controller="Treats" asp-action="AddFlavor" asp-route-id="@Model.TreatId">
+        <div class="form-group">
+            <label for="FlavorId">Flavor:</label>
+            <select class="form-control" id="FlavorId" name="FlavorId" asp-items="ViewBag.FlavorId">
+                <option value="0">--Select Flavor--</option>
+            </select>
+        </div>
+        <input type="hidden" name="TreatId" value="@Model.TreatId" />
+        <input type="hidden" name="Name" value="@Model.Name" />
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+}
+else
+{
+    <p>No flavors available to add. Please create a flavor first.</p>
+}

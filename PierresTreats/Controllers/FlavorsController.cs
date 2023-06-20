@@ -22,6 +22,7 @@ namespace PierresTreats.Controllers
       _db = db;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.Flavors.ToList());
@@ -97,7 +98,7 @@ namespace PierresTreats.Controllers
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult AddTreat([Bind("FlavorId,Name")] Flavor flavor, int TreatId)
+    public ActionResult AddTreat(Flavor flavor, int TreatId)
     {
       if (TreatId != 0 && flavor.FlavorId != 0)
       {
@@ -107,7 +108,7 @@ namespace PierresTreats.Controllers
       }
       else
       {
-        return NotFound();
+        return RedirectToAction("Index");
       }
     }
   }
