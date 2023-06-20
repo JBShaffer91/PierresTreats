@@ -1,5 +1,7 @@
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,15 +10,19 @@ html {
   }
 }
 
+body {
+  margin-bottom: 60px;
+  background-color: #FFB2D0;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.navbar {
+  background-color: #2a52be;
 }
 
-body {
-  margin-bottom: 60px;
+.navbar a {
+  color: white;
 }

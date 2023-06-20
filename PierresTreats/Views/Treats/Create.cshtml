@@ -2,10 +2,12 @@
 
 <h2>Create a new Treat</h2>
 
-<form asp-action="Create">
+<form asp-action="Create" method="post">
   <div class="form-group">
     <label asp-for="Name">Treat Name</label>
     <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
   </div>
   <input type="submit" value="Create" class="btn btn-primary" />
+  <div asp-validation-summary="All" class="text-danger"></div>
 </form>

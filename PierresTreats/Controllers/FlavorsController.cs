@@ -36,6 +36,10 @@ namespace PierresTreats.Controllers
     [HttpPost]
     public ActionResult Create(Flavor flavor)
     {
+      if (string.IsNullOrEmpty(flavor.Name))
+      {
+        return RedirectToAction("Index");
+      }
       _db.Flavors.Add(flavor);
       _db.SaveChanges();
       return RedirectToAction("Index");

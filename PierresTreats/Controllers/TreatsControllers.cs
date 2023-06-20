@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace PierresTreats.Controllers
 {
@@ -35,6 +36,10 @@ namespace PierresTreats.Controllers
     [HttpPost]
     public async Task<ActionResult> Create(Treat treat)
     {
+      if (string.IsNullOrEmpty(treat.Name))
+      {
+        return RedirectToAction("Index");
+      }
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       if (userId == null)
       {
@@ -60,7 +65,7 @@ namespace PierresTreats.Controllers
 
       if (thisTreat == null)
       {
-        return NotFound();
+        return RedirectToAction("Index");
       }
 
       return View(thisTreat);
@@ -92,7 +97,7 @@ namespace PierresTreats.Controllers
       var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
       if (thisTreat == null)
       {
-        return NotFound();
+        return RedirectToAction("Index");
       }
       _db.Treats.Remove(thisTreat);
       _db.SaveChanges();
